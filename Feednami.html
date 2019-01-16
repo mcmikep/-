@@ -2,20 +2,50 @@
 <HEAD>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<STYLE>p{width:25%;border-style: solid;}</STYLE>
 <script src="https://storage.googleapis.com/feednami-static/js/feednami-client-v1.0.1.js"></script>
+</HEAD>
+<BODY>
+<div id='100'></div>
 
+</BODY>
 <script>
+
+  
+
   var url = 'https://www.youtube.com/feeds/videos.xml?channel_id=UCZisDI6dnIXm9SI8ONf4IEQ'
   feednami.load(url,function(result){
     if(result.error){
       console.log(result.error)
     }
     else{
+
       var entries = result.feed.entries
+    /* console.log(entries[6])
+     console.log(entries[6].title)
+     console.log(entries[6].author)
+     console.log(entries[6].link)
+     var link = entries[6].link;
+     link = link.replace("watch","embed");
+      document.getElementById('100').innerHTML = '<iframe width="560" height="315"  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
+      document.getElementsByTagName('iframe')[0].setAttribute("src","https://www.youtube.com/embed/-_BJLKsAlZg"); 
+     //console.log(entries[0][title])
+      */
       for(var i = 0; i < entries.length; i++){
         var entry = entries[i]
-        document.write("whatever shit you want here")
-          console.log(entry.title)
+        var link = entry.link
+        link = link.replace("watch?v=","embed/");
+                console.log(link)
+          
+
+          //console.log(entry.link)
+      
+ var newElement = document.createElement('div');
+    newElement.id = i; 
+    newElement.innerHTML = '<iframe width="560" height="315"  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+    newElement.getElementsByTagName('iframe')[0].setAttribute("src",link);
+    document.body.appendChild(newElement);
+
       }
     }
   })
